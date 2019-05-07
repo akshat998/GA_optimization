@@ -5,12 +5,13 @@
 """
 import numpy as np
 from numpy.random import choice
+import random
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torchvision import datasets, transforms
 import matplotlib.pyplot as plt
-from GA import get_hyperparam_instance, init_model_params
+from GA import init_model_params, breed_layers, breed_dropout, breed_lr
 torch.manual_seed(7)
 
 torch.cuda.empty_cache()
@@ -92,11 +93,10 @@ def train_model(layer_num_neurons, learning_rate, dropout):
             return perc_correct
 
 
-num_layers_collected, num_neurons_layers, dropout_collected, lr_collected = init_model_params(num_models=5)
 
-def train_multiple_models():
+def train_multiple_models(num_layers_collected, num_neurons_layers, dropout_collected, lr_collected):
     evaluated_model_metrics = []
-    print('We are going to train {} models!'.format(len(num_layers_collected)))
+    print('Begining training {} models!'.format(len(num_layers_collected)))
     for i in range(len(num_layers_collected)):
         num_layers, layer_num_neurons, dropout, learning_rate = num_layers_collected[i], num_neurons_layers[i], dropout_collected[i], lr_collected[i][0]
         print('Num Layer: ', num_layers, ' layer_num_neurons:', layer_num_neurons, ' Dropout: ', dropout, ' learning_rate: ', learning_rate)
@@ -108,58 +108,71 @@ def train_multiple_models():
 
 ### THIS CODE SHALL BE ADDED TO 'GA.py'
     
-# GET THE BEST ORDERING OF PARAMETERS
-evaluated_model_metrics = train_multiple_models()
-best_model_indices = list(np.argsort(evaluated_model_metrics))
-best_model_indices.reverse()
-best_model_params = []  # Contains best model parameters (ranked based on indices)
-best_model_metrics = [] # Contains best accuaracies (ranked based on indices ) 
-for x in best_model_indices:
-    best_model_params.append([num_layers_collected[x], num_neurons_layers[x], dropout_collected[x], lr_collected[x]])
-    best_model_metrics.append(evaluated_model_metrics[x])
+# Step 1: Get results from the first round of guesses 
+num_models = 5
+num_layers_collected, num_neurons_layers, dropout_collected, lr_collected = init_model_params(num_models=num_models)
+evaluated_model_metrics = train_multiple_models(num_layers_collected, num_neurons_layers, dropout_collected, lr_collected)
 
 
-# Discard all the useless models 
-num_models_kept = int(0.2 * len(best_model_params))
-if num_models_kept == 1: # TODO: Need this? Just for diversity?
-    num_models_kept += 1
-best_model_params  = best_model_params[:num_models_kept]
-best_model_metrics = best_model_metrics[:num_models_kept]
-
-
-
-# BREED THE BEST!
-# [6, [784, 315, 350, 310, 377, 104], 0.1284315066903029, [0.0001]
-# [2, [784, 314], 0.3078126640432328, [1e-05]]
-
-
-# How do you select two for breeding?
-# Pass 'best_model_metrics' through softmax & Sample two element
-#A = np.exp(best_model_metrics) / np.sum(np.exp(best_model_metrics), axis=0)
-#draw = choice([10, 11, 12], 1, p=[0.8, 0.1, 0.1])
-#print(draw)
-
-# How do you breed the number of layers?
-# If the #layers is same, do nothing. If not, int(average)
-# Case: if same (if same neirons too, do nothing)
-#       else diff (at each iteration, randomly sample 1 model & choose num_neurons per iteration)
-# Case: if different (at each iteration, randomly sample 1 model & choose num_neurons per iteration)
-
-
-# How do you breed the dropout probability?
-# If same, do nothing. Else, average
-
-
-# How do you breed the learning rate?
-# If same, do nothing. Else, average
-
-
-
-
-
-
-
-
+# ....  FOR LOOP .................................
+num_generations = 3
+for i in range(num_generations):
+    print('On Generation: ', i)
+    # Step 2: Select the best performing models
+    best_model_indices = list(np.argsort(evaluated_model_metrics))
+    print('evaluated_model_metrics len: ', len(evaluated_model_metrics)) # TODO: Remove 
+    best_model_indices.reverse()
+    best_model_params = []  # Contains best model parameters (ranked based on indices)
+    best_model_metrics = [] # Contains best accuaracies (ranked based on indices ) 
+    for x in best_model_indices:
+        best_model_params.append([num_layers_collected[x], num_neurons_layers[x], dropout_collected[x], lr_collected[x]])
+        best_model_metrics.append(evaluated_model_metrics[x])
+    
+    # Discard all the useless models 
+    num_models_kept = int(0.2 * len(best_model_params))
+    print('Kept: ', num_models_kept)
+    if num_models_kept == 1: num_models_kept += 1 # For smaller training cases 
+    best_model_params  = best_model_params[:num_models_kept]
+    best_model_metrics = best_model_metrics[:num_models_kept]
+    
+    # Step 3: Add models by breeding 
+    num_added_models = num_models - num_models_kept
+    bred_models = []
+    for _ in range(num_added_models):
+        # Select models for breeding: pass 'best_model_metrics' through softmax & Sample two element
+        A = list(np.exp(best_model_metrics) / np.sum(np.exp(best_model_metrics), axis=0))
+        B = [x for x in range(len(best_model_params))]
+        draw = choice(B, 2, A)
+        model_choice_1 = best_model_params[draw[0]].copy()
+        model_choice_2 = best_model_params[draw[1]].copy()
+        bred_models.append(model_choice_1)
+        bred_models.append(model_choice_2)
+    
+        # Decide which parameter to breed over (a parameter is selected randomly)
+        breed_parameter = random.randint(0, 3) # 0=#layers, 1=#neurons, 2=dropout , 3=lr
+        if breed_parameter == 0:
+            child = breed_layers(model_choice_1, model_choice_2)
+        elif breed_parameter == 1:
+            child = breed_layers(model_choice_1, model_choice_2)
+        if breed_parameter == 2:
+            child = breed_dropout(model_choice_1, model_choice_2)
+        if breed_parameter == 3:
+            child = breed_lr(model_choice_1, model_choice_2)
+        bred_models.append(child)
+    print('Total: ', len(bred_models), ' children.')
+    
+    # Step 4: Train bred models and loop. 
+    num_layers_collected = []
+    num_neurons_layers = []
+    dropout_collected = []
+    lr_collected = []
+    for item in bred_models:
+        num_layers_collected.append(item[0])
+        num_neurons_layers.append(item[1])
+        dropout_collected.append(item[2])
+        lr_collected.append(item[3])
+        
+    evaluated_model_metrics = train_multiple_models(num_layers_collected, num_neurons_layers, dropout_collected, lr_collected)
 
 
 
