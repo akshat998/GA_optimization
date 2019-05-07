@@ -4,6 +4,7 @@
 @author: Akshat Kumar Nigam
 """
 import numpy as np
+from numpy.random import choice
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -126,26 +127,31 @@ best_model_params  = best_model_params[:num_models_kept]
 best_model_metrics = best_model_metrics[:num_models_kept]
 
 
+
 # BREED THE BEST!
 # [6, [784, 315, 350, 310, 377, 104], 0.1284315066903029, [0.0001]
 # [2, [784, 314], 0.3078126640432328, [1e-05]]
 
+
+# How do you select two for breeding?
+# Pass 'best_model_metrics' through softmax & Sample two element
+#A = np.exp(best_model_metrics) / np.sum(np.exp(best_model_metrics), axis=0)
+#draw = choice([10, 11, 12], 1, p=[0.8, 0.1, 0.1])
+#print(draw)
+
 # How do you breed the number of layers?
-
-
-
-
-# How do you breed the # neurons in a layer
-
-
+# If the #layers is same, do nothing. If not, int(average)
+# Case: if same (if same neirons too, do nothing)
+#       else diff (at each iteration, randomly sample 1 model & choose num_neurons per iteration)
+# Case: if different (at each iteration, randomly sample 1 model & choose num_neurons per iteration)
 
 
 # How do you breed the dropout probability?
-
-
+# If same, do nothing. Else, average
 
 
 # How do you breed the learning rate?
+# If same, do nothing. Else, average
 
 
 
