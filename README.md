@@ -3,9 +3,9 @@
 ![Overview image](img.jpg)
 
 
-This repository encourages the use of Genetic Algorithms for hyperparameter optimization. /
+This repository encourages the use of Genetic Algorithms for hyperparameter optimization. 
 
-For testing, a classifier for MNIST digits is implemented. /
+For testing, a classifier for MNIST digits is implemented. 
 
 The motivation is to provide an alternative stratergy to Baysean Optimization. With more that 20 hyperparameters, baysean optimization becomes infeasible. 
 
