@@ -109,7 +109,7 @@ def train_multiple_models(num_layers_collected, num_neurons_layers, dropout_coll
 ### GENETIC EVOLUTION LOOP 
     
 # Step 1: Get results from the first round of guesses 
-num_models = 5
+num_models = 10
 num_layers_collected, num_neurons_layers, dropout_collected, lr_collected = init_model_params(num_models=num_models)
 evaluated_model_metrics = train_multiple_models(num_layers_collected, num_neurons_layers, dropout_collected, lr_collected, num_epochs=1)
 f.write('Generation results: '+ str(evaluated_model_metrics) + '\n')

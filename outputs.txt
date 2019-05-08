@@ -1,0 +1,131 @@
+		START WITH 5 MODELS
+Generation results: [26.68, 89.02, 10.61, 10.11, 10.63]
+On Generation: 1
+Generation results: [70.17, 93.73, 93.26, 94.01, 93.87, 93.67, 92.5]
+On Generation: 2
+Generation results: [93.8, 93.67, 93.33, 93.58999999999999, 94.24, 94.15, 93.47]
+On Generation: 3
+Generation results: [93.97, 94.32000000000001, 93.67, 93.66, 93.77, 93.67999999999999, 94.21000000000001]
+
+		START WITH 10 MODELS
+Generation results: [10.57, 81.38, 90.79, 9.78, 90.89, 51.71, 89.31, 10.100000000000001, 10.780000000000001, 60.099999999999994]
+On Generation: 1
+Generation results: [95.95, 89.51, 89.77000000000001, 87.15, 96.0, 89.49000000000001, 90.55, 88.38000000000001, 93.82000000000001, 95.17, 86.83999999999999, 89.7]
+On Generation: 2
+Generation results: [95.99, 94.92, 93.38, 88.5, 96.15, 96.96000000000001, 94.47, 94.67, 96.48, 89.85, 95.39, 95.26]
+On Generation: 3
+Generation results: [94.96, 95.49, 95.28999999999999, 95.50999999999999, 94.43, 96.33, 96.50999999999999, 94.15, 95.92, 94.35, 96.34, 96.58]
+
+
+
+
+Running:  cpu
+Begining training 10 models!
+Num Layer:  3  layer_num_neurons: [784, 163, 394]  Dropout:  0.8968072624835259  learning_rate:  0.005
+Num Layer:  2  layer_num_neurons: [784, 399]  Dropout:  0.5933396782272905  learning_rate:  0.005
+Num Layer:  2  layer_num_neurons: [784, 424]  Dropout:  0.3228054086163846  learning_rate:  0.001
+Num Layer:  3  layer_num_neurons: [784, 306, 378]  Dropout:  0.725654826558112  learning_rate:  0.005
+Num Layer:  3  layer_num_neurons: [784, 286, 373]  Dropout:  0.05403792636864768  learning_rate:  0.001
+Num Layer:  5  layer_num_neurons: [784, 331, 246, 53, 140]  Dropout:  0.6192513581599899  learning_rate:  0.0005
+Num Layer:  3  layer_num_neurons: [784, 379, 308]  Dropout:  0.4457648770946613  learning_rate:  0.0005
+Num Layer:  3  layer_num_neurons: [784, 169, 470]  Dropout:  0.6804274995657086  learning_rate:  0.1
+Num Layer:  7  layer_num_neurons: [784, 354, 234, 97, 469, 239, 305]  Dropout:  0.7618520640176293  learning_rate:  0.005
+Num Layer:  4  layer_num_neurons: [784, 492, 411, 223]  Dropout:  0.13507955073031896  learning_rate:  1e-05
+On Generation:  1
+Kept:  5
+Total:  12  children bred.
+Begining training 12 models!
+Num Layer:  2  layer_num_neurons: [784, 424]  Dropout:  0.3228054086163846  learning_rate:  0.001
+Num Layer:  4  layer_num_neurons: [784, 492, 411, 223]  Dropout:  0.13507955073031896  learning_rate:  1e-05
+Num Layer:  4  layer_num_neurons: [784, 492, 411, 223]  Dropout:  0.2289424796733518  learning_rate:  0.001
+Num Layer:  2  layer_num_neurons: [784, 399]  Dropout:  0.5195522776609759  learning_rate:  0.005
+Num Layer:  3  layer_num_neurons: [784, 286, 373]  Dropout:  0.05403792636864768  learning_rate:  0.001
+Num Layer:  4  layer_num_neurons: [784, 492, 411, 223]  Dropout:  0.13507955073031896  learning_rate:  1e-05
+Num Layer:  3  layer_num_neurons: [784, 492, 411]  Dropout:  0.13507955073031896  learning_rate:  1e-05
+Num Layer:  2  layer_num_neurons: [784, 424]  Dropout:  0.5933396782272905  learning_rate:  0.003
+Num Layer:  4  layer_num_neurons: [784, 492, 411, 223]  Dropout:  0.09455873854948332  learning_rate:  0.001
+Num Layer:  3  layer_num_neurons: [784, 424, 411]  Dropout:  0.13507955073031896  learning_rate:  0.001
+Num Layer:  4  layer_num_neurons: [784, 492, 411, 223]  Dropout:  0.36420961447880473  learning_rate:  1e-05
+Num Layer:  4  layer_num_neurons: [784, 492, 411, 223]  Dropout:  0.13507955073031896  learning_rate:  1e-05
+Generation best:  96.0
+On Generation:  2
+Kept:  6
+Total:  12  children bred.
+Begining training 12 models!
+Num Layer:  2  layer_num_neurons: [784, 424]  Dropout:  0.3228054086163846  learning_rate:  0.001
+Num Layer:  4  layer_num_neurons: [784, 492, 411, 223]  Dropout:  0.09455873854948332  learning_rate:  0.001
+Num Layer:  3  layer_num_neurons: [784, 492, 411]  Dropout:  0.09455873854948332  learning_rate:  0.001
+Num Layer:  4  layer_num_neurons: [784, 492, 411, 223]  Dropout:  0.14149020302099974  learning_rate:  0.001
+Num Layer:  2  layer_num_neurons: [784, 424]  Dropout:  0.13507955073031896  learning_rate:  0.001
+Num Layer:  2  layer_num_neurons: [784, 424]  Dropout:  0.13507955073031896  learning_rate:  0.001
+Num Layer:  3  layer_num_neurons: [784, 492, 411]  Dropout:  0.18201101520183538  learning_rate:  0.001
+Num Layer:  3  layer_num_neurons: [784, 492, 411]  Dropout:  0.2289424796733518  learning_rate:  0.001
+Num Layer:  3  layer_num_neurons: [784, 286, 373]  Dropout:  0.0742983324590655  learning_rate:  0.001
+Num Layer:  3  layer_num_neurons: [784, 492, 411]  Dropout:  0.2289424796733518  learning_rate:  1e-05
+Num Layer:  3  layer_num_neurons: [784, 492, 411]  Dropout:  0.09455873854948332  learning_rate:  0.001
+Num Layer:  3  layer_num_neurons: [784, 424, 411]  Dropout:  0.2289424796733518  learning_rate:  0.001
+Generation best:  96.96000000000001
+On Generation:  3
+Kept:  6
+Total:  12  children bred.
+Begining training 12 models!
+Num Layer:  3  layer_num_neurons: [784, 492, 411]  Dropout:  0.09455873854948332  learning_rate:  0.001
+Num Layer:  2  layer_num_neurons: [784, 424]  Dropout:  0.3228054086163846  learning_rate:  0.001
+Num Layer:  3  layer_num_neurons: [784, 492, 411]  Dropout:  0.09455873854948332  learning_rate:  0.001
+Num Layer:  3  layer_num_neurons: [784, 492, 411]  Dropout:  0.09455873854948332  learning_rate:  0.001
+Num Layer:  3  layer_num_neurons: [784, 492, 411]  Dropout:  0.3228054086163846  learning_rate:  0.001
+Num Layer:  2  layer_num_neurons: [784, 424]  Dropout:  0.2289424796733518  learning_rate:  0.001
+Num Layer:  2  layer_num_neurons: [784, 424]  Dropout:  0.0742983324590655  learning_rate:  0.001
+Num Layer:  3  layer_num_neurons: [784, 424, 411]  Dropout:  0.2289424796733518  learning_rate:  0.001
+Num Layer:  2  layer_num_neurons: [784, 424]  Dropout:  0.3228054086163846  learning_rate:  0.001
+Num Layer:  3  layer_num_neurons: [784, 492, 411]  Dropout:  0.3228054086163846  learning_rate:  0.001
+Num Layer:  2  layer_num_neurons: [784, 424]  Dropout:  0.13507955073031896  learning_rate:  0.001
+Num Layer:  2  layer_num_neurons: [784, 424]  Dropout:  0.13507955073031896  learning_rate:  0.001
+Generation best:  96.58
+
+
+
+
+
+Begining training 5 models!
+Num Layer:  3  layer_num_neurons: [784, 327, 414]  Dropout:  0.6555977616421592  learning_rate:  1e-05
+Num Layer:  3  layer_num_neurons: [784, 334, 424]  Dropout:  0.4511203014942886  learning_rate:  0.0005
+Num Layer:  6  layer_num_neurons: [784, 70, 376, 266, 222, 434]  Dropout:  0.5662554130057055  learning_rate:  1e-05
+Num Layer:  7  layer_num_neurons: [784, 440, 221, 491, 392, 88, 169]  Dropout:  0.9430985719228305  learning_rate:  0.01
+Num Layer:  4  layer_num_neurons: [784, 133, 266, 289]  Dropout:  0.9457900175245796  learning_rate:  0.005
+On Generation:  1
+Kept:  2
+Total:  7  children bred.
+Begining training 7 models!
+Num Layer:  3  layer_num_neurons: [784, 327, 414]  Dropout:  0.6555977616421592  learning_rate:  1e-05
+Num Layer:  3  layer_num_neurons: [784, 334, 424]  Dropout:  0.4511203014942886  learning_rate:  0.0005
+Num Layer:  3  layer_num_neurons: [784, 334, 414]  Dropout:  0.4511203014942886  learning_rate:  0.0005
+Num Layer:  3  layer_num_neurons: [784, 334, 424]  Dropout:  0.4511203014942886  learning_rate:  0.0005
+Num Layer:  3  layer_num_neurons: [784, 334, 424]  Dropout:  0.4511203014942886  learning_rate:  0.000255
+Num Layer:  3  layer_num_neurons: [784, 334, 424]  Dropout:  0.4511203014942886  learning_rate:  0.0005
+Num Layer:  3  layer_num_neurons: [784, 334, 424]  Dropout:  0.553359031568224  learning_rate:  0.0005
+Generation best:  94.01
+On Generation:  2
+Kept:  3
+Total:  7  children bred.
+Begining training 7 models!
+Num Layer:  3  layer_num_neurons: [784, 334, 424]  Dropout:  0.4511203014942886  learning_rate:  0.000255
+Num Layer:  3  layer_num_neurons: [784, 334, 424]  Dropout:  0.4511203014942886  learning_rate:  0.0005
+Num Layer:  3  layer_num_neurons: [784, 334, 424]  Dropout:  0.4511203014942886  learning_rate:  0.0005
+Num Layer:  3  layer_num_neurons: [784, 334, 424]  Dropout:  0.4511203014942886  learning_rate:  0.0005
+Num Layer:  3  layer_num_neurons: [784, 334, 424]  Dropout:  0.4511203014942886  learning_rate:  0.000255
+Num Layer:  3  layer_num_neurons: [784, 334, 424]  Dropout:  0.4511203014942886  learning_rate:  0.000255
+Num Layer:  3  layer_num_neurons: [784, 334, 424]  Dropout:  0.4511203014942886  learning_rate:  0.0005
+Generation best:  94.24
+On Generation:  3
+Kept:  3
+Total:  7  children bred.
+Begining training 7 models!
+Num Layer:  3  layer_num_neurons: [784, 334, 424]  Dropout:  0.4511203014942886  learning_rate:  0.000255
+Num Layer:  3  layer_num_neurons: [784, 334, 424]  Dropout:  0.4511203014942886  learning_rate:  0.000255
+Num Layer:  3  layer_num_neurons: [784, 334, 424]  Dropout:  0.4511203014942886  learning_rate:  0.000255
+Num Layer:  3  layer_num_neurons: [784, 334, 424]  Dropout:  0.4511203014942886  learning_rate:  0.000255
+Num Layer:  3  layer_num_neurons: [784, 334, 424]  Dropout:  0.4511203014942886  learning_rate:  0.000255
+Num Layer:  3  layer_num_neurons: [784, 334, 424]  Dropout:  0.4511203014942886  learning_rate:  0.000255
+Num Layer:  3  layer_num_neurons: [784, 334, 424]  Dropout:  0.4511203014942886  learning_rate:  0.000255
+
