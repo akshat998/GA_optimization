@@ -15,7 +15,8 @@ The code attempts to optimize paramters:
 - The dropout rate
 - The learning rate 
 
-After generation 0 (for which parameters are randomly selected), the top performing models are selected, and multiple children are bred using randomness (modifying randomly selected parameter from above). 
+After generation 0 (for which parameters are randomly selected), the top performing models are selected, and multiple children are bred using randomness (modifying randomly selected parameter from above). /
+Generation 0 is trained for 1 epoch, Generation 1 is trained for 2 epochs, Generation 2 is trained for 3 epochs, and so on...
 
 
 # Installation Requirements
@@ -53,7 +54,13 @@ For a quick start, please ensure the following.
 
    `outputs.txt`
 
+# Results
 
+|                | # Starting Models | Best generation 0 classification error (Test set 20k images) | Best generation 1  classification error  (Test set 20k images) | Best generation 2 classification error (Test set 20k images) |
+|----------------|:-----------------:|:------------------------------------------------------------:|:--------------------------------------------------------------:|:------------------------------------------------------------:|
+| Experiment 1   |         5         | 94.01                                                        |                                                                |                                                              |
+| Experiment 2   |         10        |                                                              |                                                                |                                                              |
+| Epochs Trained |                   | 2                                                            |                                3                               | 3                                                            |
 
 # Questions, problems?
 
