@@ -2,6 +2,8 @@
 
 This repository encourages the use of Genetic Algorithms for hyperparameter optimization. /
 
+For testing, a classifier for MNIST digits is implemented. /
+
 The motivation is to provide an alternative stratergy to Baysean Optimization. With more that 20 hyperparameters, baysean optimization becomes infeasible. 
 
 # Hyperparameters
@@ -13,7 +15,7 @@ The code attempts to optimize paramters:
 - The dropout rate
 - The learning rate 
 
-After generation 0 (for which parameters are randomly selected), the top performing models are selected, and multiple children are bred using randomness (on a randomly selected parameter from above). 
+After generation 0 (for which parameters are randomly selected), the top performing models are selected, and multiple children are bred using randomness (modifying randomly selected parameter from above). 
 
 
 # Installation Requirements
@@ -43,7 +45,9 @@ For a quick start, please ensure the following.
 
   ` python3 mnist_classifier.py`
 
-  You will be asked to enter some parameters prior to training.
+  For quicker training, the following variables in `mnist_classifier.py` can be modified:
+   - num_models     : Indicating the number of models in the starting generation
+   - num_generations: The number of breeding generations
 
   Results for each generation of models is saved in 
 
