@@ -55,13 +55,11 @@ For a quick start, please ensure the following.
    `outputs.txt`
 
 # Results
-
-|                | # Starting Models | Best generation 0 classification error (Test set 20k images) | Best generation 1  classification error  (Test set 20k images) | Best generation 2 classification error (Test set 20k images) |
-|----------------|:-----------------:|:------------------------------------------------------------:|:--------------------------------------------------------------:|:------------------------------------------------------------:|
-| Experiment 1   |         5         | 94.01                                                        |                                                                |                                                              |
-| Experiment 2   |         10        |                                                              |                                                                |                                                              |
-| Epochs Trained |                   | 2                                                            |                                3                               | 3                                                            |
-
+|                | # Starting Models | Best generation 0 classification error (Test set 20k images) | Best generation 1 classification error (Test set 20k images) | Best generation 2  classification error  (Test set 20k images) | Best generation 3 classification error (Test set 20k images) |
+|----------------|:-----------------:|:------------------------------------------------------------:|:------------------------------------------------------------:|:--------------------------------------------------------------:|:------------------------------------------------------------:|
+| Experiment 1   |         5         |                            26.68%                            |                            94.01%                            |                             94.24%                             |                            94.32%                            |
+| Experiment 2   |         10        |                            51.71%                            |                             96.0%                            |                              96.9%                             |                            96.58%                            |
+| Epochs Trained |                   |                               1                              |                               2                              |                                3                               |                               4                              |
 # Questions, problems?
 
 Make a github issue 😄. Please be as clear and descriptive as possible. Please feel free to reach
