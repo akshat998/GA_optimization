@@ -28,6 +28,7 @@ test_dataset = datasets.MNIST(root='./mnist_data/', train=False, transform=trans
 
 train_loader = torch.utils.data.DataLoader(dataset=train_dataset, batch_size=batch_size, shuffle=True)
 test_loader = torch.utils.data.DataLoader(dataset=test_dataset, batch_size=10000, shuffle=False)
+f = open("outputs.txt", "a+")
 
 
 
@@ -70,8 +71,7 @@ def eval_model(model, epoch):
      return perc_correct
 
 
-def train_model(layer_num_neurons, learning_rate, dropout):
-    num_epochs = 1  # TODO: Number of epochs must be increased for the final test 
+def train_model(layer_num_neurons, learning_rate, dropout, num_epochs):
     model = MLP(layer_num_neurons, 10, dropout).to(device)
     criterion = nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
@@ -94,33 +94,36 @@ def train_model(layer_num_neurons, learning_rate, dropout):
 
 
 
-def train_multiple_models(num_layers_collected, num_neurons_layers, dropout_collected, lr_collected):
+def train_multiple_models(num_layers_collected, num_neurons_layers, dropout_collected, lr_collected, num_epochs):
     evaluated_model_metrics = []
     print('Begining training {} models!'.format(len(num_layers_collected)))
     for i in range(len(num_layers_collected)):
         num_layers, layer_num_neurons, dropout, learning_rate = num_layers_collected[i], num_neurons_layers[i], dropout_collected[i], lr_collected[i][0]
         print('Num Layer: ', num_layers, ' layer_num_neurons:', layer_num_neurons, ' Dropout: ', dropout, ' learning_rate: ', learning_rate)
         assert num_layers == len(layer_num_neurons) # Ensuring proper parameters 
-        evaluated_model_metrics.append(train_model(layer_num_neurons, learning_rate, dropout))
+        evaluated_model_metrics.append(train_model(layer_num_neurons, learning_rate, dropout, num_epochs))
     assert len(evaluated_model_metrics) == len(num_layers_collected)
     return evaluated_model_metrics
 
 
-### THIS CODE SHALL BE ADDED TO 'GA.py'
+### GENETIC EVOLUTION LOOP 
     
 # Step 1: Get results from the first round of guesses 
 num_models = 5
 num_layers_collected, num_neurons_layers, dropout_collected, lr_collected = init_model_params(num_models=num_models)
-evaluated_model_metrics = train_multiple_models(num_layers_collected, num_neurons_layers, dropout_collected, lr_collected)
+evaluated_model_metrics = train_multiple_models(num_layers_collected, num_neurons_layers, dropout_collected, lr_collected, num_epochs=1)
+f.write('Generation results: '+ str(evaluated_model_metrics) + '\n')
 
 
 # ....  FOR LOOP .................................
 num_generations = 3
 for i in range(num_generations):
-    print('On Generation: ', i)
+    print('On Generation: ', i+1)
+    f.write('On Generation: '+ str(i+1) + '\n')
+
     # Step 2: Select the best performing models
     best_model_indices = list(np.argsort(evaluated_model_metrics))
-    print('evaluated_model_metrics len: ', len(evaluated_model_metrics)) # TODO: Remove 
+
     best_model_indices.reverse()
     best_model_params = []  # Contains best model parameters (ranked based on indices)
     best_model_metrics = [] # Contains best accuaracies (ranked based on indices ) 
@@ -129,7 +132,7 @@ for i in range(num_generations):
         best_model_metrics.append(evaluated_model_metrics[x])
     
     # Discard all the useless models 
-    num_models_kept = int(0.2 * len(best_model_params))
+    num_models_kept = int(0.5 * len(best_model_params))
     print('Kept: ', num_models_kept)
     if num_models_kept == 1: num_models_kept += 1 # For smaller training cases 
     best_model_params  = best_model_params[:num_models_kept]
@@ -138,15 +141,16 @@ for i in range(num_generations):
     # Step 3: Add models by breeding 
     num_added_models = num_models - num_models_kept
     bred_models = []
-    for _ in range(num_added_models):
+    for i in range(num_added_models+num_models_kept):
         # Select models for breeding: pass 'best_model_metrics' through softmax & Sample two element
         A = list(np.exp(best_model_metrics) / np.sum(np.exp(best_model_metrics), axis=0))
         B = [x for x in range(len(best_model_params))]
         draw = choice(B, 2, A)
         model_choice_1 = best_model_params[draw[0]].copy()
         model_choice_2 = best_model_params[draw[1]].copy()
-        bred_models.append(model_choice_1)
-        bred_models.append(model_choice_2)
+        if i == 0:
+             bred_models.append(model_choice_1)
+             bred_models.append(model_choice_2)
     
         # Decide which parameter to breed over (a parameter is selected randomly)
         breed_parameter = random.randint(0, 3) # 0=#layers, 1=#neurons, 2=dropout , 3=lr
@@ -159,7 +163,7 @@ for i in range(num_generations):
         if breed_parameter == 3:
             child = breed_lr(model_choice_1, model_choice_2)
         bred_models.append(child)
-    print('Total: ', len(bred_models), ' children.')
+    print('Total: ', len(bred_models), ' children bred.')
     
     # Step 4: Train bred models and loop. 
     num_layers_collected = []
@@ -172,7 +176,9 @@ for i in range(num_generations):
         dropout_collected.append(item[2])
         lr_collected.append(item[3])
         
-    evaluated_model_metrics = train_multiple_models(num_layers_collected, num_neurons_layers, dropout_collected, lr_collected)
+    evaluated_model_metrics = train_multiple_models(num_layers_collected, num_neurons_layers, dropout_collected, lr_collected, num_epochs=i+2)
+    print('Generation best: ', max(evaluated_model_metrics))
+    f.write('Generation results: '+ str(evaluated_model_metrics) + '\n')
 
 
 

@@ -164,4 +164,4 @@ def breed_lr(model_choice_1, model_choice_2):
     # mutate dropout
     lr = (model_choice_1[3][0] + model_choice_2[3][0]) / 2
         
-    return [num_layers, neurons, drop, lr].copy()
+    return [num_layers, neurons, drop, [lr]].copy()
