@@ -1,5 +1,8 @@
 # GA_optimization
 
+![Overview image](img.jpg)
+
+
 This repository encourages the use of Genetic Algorithms for hyperparameter optimization. /
 
 For testing, a classifier for MNIST digits is implemented. /
